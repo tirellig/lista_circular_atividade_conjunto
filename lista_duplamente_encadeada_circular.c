@@ -105,6 +105,9 @@ int troca(Lista *li, int id_busca) {
     Elemento *anterior              = atual->ant;
     Elemento *proximo_do_proximo    = proximo->prox;
 
+    //============================================
+    //============================================
+
     // Conexões entre anterior e proximo
     anterior->prox  = proximo;
     proximo->ant    = anterior;
@@ -117,10 +120,18 @@ int troca(Lista *li, int id_busca) {
     atual->prox             = proximo_do_proximo;
     proximo_do_proximo->ant = atual;
 
+    //============================================
+    //============================================
+
     // Ajuste do Cabeçalho (*li)
     // 1. E se o elemento buscado for o primeiro?
-
+    if (atual == *li) {
+        *li = proximo;
+    }   
     // 2. E se o elemento buscado for o último?
+    else if (proximo == *li) { //Usa proximo em vez de atual, e else if pra evitar comparação errada
+        *li = atual;
+    }
 
     return 1;
 }
