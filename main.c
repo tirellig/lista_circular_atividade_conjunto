@@ -107,6 +107,7 @@ int main() {
 
     // 11. Libere toda a memória restante (Wendell)
     liberar_lista(li);
+    li = NULL;
 
     printf("\n[ Programa finalizado e memoria liberada com sucesso. ]\n");
     
