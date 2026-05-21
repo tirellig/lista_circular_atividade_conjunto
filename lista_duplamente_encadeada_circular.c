@@ -51,24 +51,27 @@ int inserir_transacao_ordenado(Lista *li, Transacao t) {
 int remover_transacao_id(Lista *li, int id_busca) {
     if (li == NULL || *li == NULL) return 0; // Lista não existe ou vazia
     
-    Elemento *anterior = NULL;
+//Elemento *anterior = NULL; não usa null
     Elemento *atual = *li;
 
     // Busca pelo elemento
-    while (atual != NULL && atual->dados.id != id_busca) {
-        anterior    = atual;
-        atual       = atual->prox;
-    }
+do {
+    if (atual->dados.id == id_busca);//acessa o id atual e compara o id com oq eu procuro    
+    atual = atual->prox;//se n encontrar, vai pro prox
     
-    if (atual == NULL) return 0; // Elemento não encontrado ou lista vazia
-    
-    // O elemento a ser removido é o primeiro da lista
-    if (anterior == NULL) {
-        // trata tanto a lista com um único elemento (vai ficar vazia) 
-        *li = atual->prox; // vai ficar NULL se atual for o único
+} while (atual != *li); 
+
+    if (atual->dados.id == id_busca) return 0; // não achou o id na lista toda
+     {
+// trata tanto a lista com um único elemento (vai ficar vazia) 
+       if (atual->prox == atual && atual->ant == atual) {
+            *li =NULL; // lista fica sem nd
+
     } else {
+
         // O elemento a ser removido está no meio ou no fim
-        anterior->prox = atual->prox;
+        atual->ant->prox = atual->prox;
+        atual->prox->ant = atual->ant;
     }
     
     free(atual); // Libera a memória do nó removido
