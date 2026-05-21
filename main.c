@@ -56,7 +56,6 @@ int main() {
         printf("\nErro na remoçao! \n");
     }
 
-
     // 5. Removendo a primeira transação (Pedro)
     if (remover_transacao_inicio(li)){
         printf("\n--- Apos remover a primeira transacao ---\n");
