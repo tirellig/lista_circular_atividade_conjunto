@@ -75,14 +75,15 @@ int remover_transacao_id(Lista *li, int id_busca) {
     Elemento *atual = *li;
 
     // Busca pelo elemento
-do {
-    if (atual->dados.id == id_busca);//acessa o id atual e compara o id com oq eu procuro    
+        do {
+    if (atual->dados.id == id_busca)
+        break;//acessa o id atual e compara o id com oq eu procuro    
     atual = atual->prox;//se n encontrar, vai pro prox
     
-} while (atual != *li); 
+        } while (atual != *li); 
 
-    if (atual->dados.id == id_busca) return 0; // não achou o id na lista toda
-     {
+    if (atual->dados.id != id_busca) return 0; // não achou o id na lista toda
+    
 // trata tanto a lista com um único elemento (vai ficar vazia) 
        if (atual->prox == atual && atual->ant == atual) {
             *li =NULL; // lista fica sem nd
