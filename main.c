@@ -23,7 +23,7 @@ int main() {
     inserir_transacao_inicio(li, transacao5);
 
     imprimir_lista(li);
-
+    
     // 2. Trocar elementos
     if (troca(li, 27)){
         printf("\nTroca bem sucedida! \n");
@@ -31,22 +31,22 @@ int main() {
     } else {
         printf("\nErro na troca! \n");
     }
-
+    
     // 3. E se o elemento buscado for o primeiro ou o ultimo? (Victor)
-    if (troca(li, 9)){
+    if (troca(li, 9)){ //primeiro elemento
         printf("\nTroca bem sucedida! \n");
         imprimir_lista(li);
     } else {
         printf("\nErro na troca! \n");
     }     
 
-    if (troca(li, 6)){
+    if (troca(li, 6)){ //ultimo elemento
         printf("\nTroca bem sucedida! \n");
         imprimir_lista(li);
     } else {
         printf("\nErro na troca! \n");
     }
-
+    
     // 4. Removendo uma transação por id (Sabrinna)
     int id_alvo = 27;
     if (remover_transacao_id(li, id_alvo)){
@@ -55,7 +55,6 @@ int main() {
     } else {
         printf("\nErro na remoçao! \n");
     }
-
 
     // 5. Removendo a primeira transação (Pedro)
     if (remover_transacao_inicio(li)){
@@ -85,8 +84,8 @@ int main() {
     
     // 8. Inserindo uma transacao no meio (ordenado) (Rafael)
     Transacao transacao7;
-    transacao7.id = 15; transacao6.valor = 700;
-    if (inserir_transacao_final(li, transacao7)){
+    transacao7.id = 15; transacao7.valor = 700;
+    if (inserir_transacao_ordenado(li, transacao7)){
         printf("\n--- Apos inserir uma transacao ordenado ---\n");
         imprimir_lista(li);
     } else {
@@ -103,7 +102,7 @@ int main() {
 
     // 10. Imprime lista inversa (Gabriel)
     printf("\n--- Lista Inversa --- \n");
-    imprimir_lista_inversa(li);
+    if(imprimir_lista_inversa(li)==0) printf("Erro na impressão da lista inversa!\n");
 
     // 11. Libere toda a memória restante (Wendell)
     liberar_lista(li);
@@ -112,4 +111,5 @@ int main() {
     printf("\n[ Programa finalizado e memoria liberada com sucesso. ]\n");
     
     return 0; // Verifica se o programa retorna 0 com sucesso (sem crash).
+
 }

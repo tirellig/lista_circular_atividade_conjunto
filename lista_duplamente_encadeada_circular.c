@@ -38,6 +38,26 @@ int inserir_transacao_inicio(Lista *li, Transacao t) {
 }
 
 int inserir_transacao_final(Lista *li, Transacao t) {
+    if(li == NULL) return 0;
+
+    Elemento *novo = (Elemento *) malloc(sizeof(Elemento));
+    if(novo == NULL) return 0;
+
+    novo->dados = t;
+    if(*li == NULL){
+        novo->ant = novo;
+        novo->prox = novo;
+        *li = novo;
+    } else{
+    Elemento *primeiro = *li;
+    Elemento *ultimo = primeiro->ant;
+
+    novo->prox = primeiro;
+    novo->ant = ultimo;
+
+    primeiro->ant = novo;
+    ultimo->prox = novo;
+    }
 
     return 1;
 }
@@ -79,6 +99,22 @@ do {
 }
 
 int remover_transacao_inicio(Lista *li) {
+    if (li == NULL || *li == NULL) return 0;
+
+    Elemento *primeiro = *li;
+    if (primeiro->prox == primeiro) {
+        *li = NULL;
+    } 
+    else {
+        Elemento *ultimo  = primeiro->ant;
+        Elemento *segundo = primeiro->prox;
+
+        ultimo->prox  = segundo;
+        segundo->ant  = ultimo;
+        *li = segundo;
+    }
+
+    free(primeiro);
 
     return 1;
 }
@@ -108,6 +144,9 @@ int troca(Lista *li, int id_busca) {
     Elemento *anterior              = atual->ant;
     Elemento *proximo_do_proximo    = proximo->prox;
 
+    //============================================
+    //============================================
+
     // Conexões entre anterior e proximo
     anterior->prox  = proximo;
     proximo->ant    = anterior;
@@ -120,10 +159,18 @@ int troca(Lista *li, int id_busca) {
     atual->prox             = proximo_do_proximo;
     proximo_do_proximo->ant = atual;
 
+    //============================================
+    //============================================
+
     // Ajuste do Cabeçalho (*li)
     // 1. E se o elemento buscado for o primeiro?
-
+    if (atual == *li) {
+        *li = proximo;
+    }   
     // 2. E se o elemento buscado for o último?
+    else if (proximo == *li) { //Usa proximo em vez de atual, e else if pra evitar comparação errada
+        *li = atual;
+    }
 
     return 1;
 }
@@ -142,20 +189,28 @@ void imprimir_lista(Lista *li) {
     Elemento *atual = *li;
     Elemento *ultimo = (*li)->ant;
 
-    printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
+    //printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
     do {
         printf("[ID: %d | Valor: R$ %.2f] <-> ", atual->dados.id, atual->dados.valor);
         atual = atual->prox;
     } while (atual != *li);
-    printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
+    //printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
 }
 
-void imprimir_lista_inversa(Lista *li){
+int imprimir_lista_inversa(Lista *li){
     if (li == NULL || *li == NULL) {
         printf("Lista vazia.\n");
-        return;
+        return 0;
     }
-    return;
+
+    Elemento* referencia = (*li)->ant;
+
+    do {
+        printf("[ID: %d | Valor: R$ %.2f] \n", referencia->dados.id, referencia->dados.valor);
+        referencia = referencia->ant;
+    } while (referencia!=(*li)->ant);
+
+    return 1;
 }
 
 void liberar_lista(Lista *li) {
