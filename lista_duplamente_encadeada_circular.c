@@ -186,12 +186,12 @@ void imprimir_lista(Lista *li) {
     Elemento *atual = *li;
     Elemento *ultimo = (*li)->ant;
 
-    printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
+    //printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
     do {
         printf("[ID: %d | Valor: R$ %.2f] <-> ", atual->dados.id, atual->dados.valor);
         atual = atual->prox;
     } while (atual != *li);
-    printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
+    //printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
 }
 
 int imprimir_lista_inversa(Lista *li){
