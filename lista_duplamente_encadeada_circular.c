@@ -38,6 +38,26 @@ int inserir_transacao_inicio(Lista *li, Transacao t) {
 }
 
 int inserir_transacao_final(Lista *li, Transacao t) {
+    if(li == NULL) return 0;
+
+    Elemento *novo = (Elemento *) malloc(sizeof(Elemento));
+    if(novo == NULL) return 0;
+
+    novo->dados = t;
+    if(*li == NULL){
+        novo->ant = novo;
+        novo->prox = novo;
+        *li = novo;
+    } else{
+    Elemento *primeiro = *li;
+    Elemento *ultimo = primeiro->ant;
+
+    novo->prox = primeiro;
+    novo->ant = ultimo;
+
+    primeiro->ant = novo;
+    ultimo->prox = novo;
+    }
 
     return 1;
 }
