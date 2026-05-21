@@ -96,6 +96,22 @@ int remover_transacao_id(Lista *li, int id_busca) {
 }
 
 int remover_transacao_inicio(Lista *li) {
+    if (li == NULL || *li == NULL) return 0;
+
+    Elemento *primeiro = *li;
+    if (primeiro->prox == primeiro) {
+        *li = NULL;
+    } 
+    else {
+        Elemento *ultimo  = primeiro->ant;
+        Elemento *segundo = primeiro->prox;
+
+        ultimo->prox  = segundo;
+        segundo->ant  = ultimo;
+        *li = segundo;
+    }
+
+    free(primeiro);
 
     return 1;
 }
