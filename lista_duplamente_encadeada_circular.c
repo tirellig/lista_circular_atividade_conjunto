@@ -166,11 +166,9 @@ int imprimir_lista_inversa(Lista *li){
 
     Elemento* referencia = (*li)->ant;
 
-    int i = 0;
     while (referencia!=*li){
         printf("[ID: %d | Valor: R$ %.2f] \n", referencia->dados.id, referencia->dados.valor);
         referencia = referencia->ant;
-        printf("%d", ++i);
     }
 
     return 1;
