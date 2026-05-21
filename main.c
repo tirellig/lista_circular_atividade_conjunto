@@ -23,7 +23,7 @@ int main() {
     inserir_transacao_inicio(li, transacao5);
 
     imprimir_lista(li);
-    /*
+    
     // 2. Trocar elementos
     if (troca(li, 27)){
         printf("\nTroca bem sucedida! \n");
@@ -31,7 +31,7 @@ int main() {
     } else {
         printf("\nErro na troca! \n");
     }
-    */
+    
     // 3. E se o elemento buscado for o primeiro ou o ultimo? (Victor)
     if (troca(li, 9)){ //primeiro elemento
         printf("\nTroca bem sucedida! \n");
@@ -46,7 +46,7 @@ int main() {
     } else {
         printf("\nErro na troca! \n");
     }
-    /*
+    
     // 4. Removendo uma transação por id (Sabrinna)
     int id_alvo = 27;
     if (remover_transacao_id(li, id_alvo)){
@@ -113,6 +113,4 @@ int main() {
     
     return 0; // Verifica se o programa retorna 0 com sucesso (sem crash).
 
-*/
-    return 0;
 }
