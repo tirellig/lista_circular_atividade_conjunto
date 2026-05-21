@@ -197,12 +197,20 @@ int imprimir_lista_inversa(Lista *li){
 void liberar_lista(Lista *li) {
     if (li == NULL || *li == NULL) return;
 
-    Elemento *atual = *li;
+    Elemento *inicio = *li;
+    Elemento *atual = inicio->prox;
 
-    while (atual != NULL) {
+    // Percorre a lista circular liberando cada nó, guardando o próximo antes do free
+    while (atual != inicio) {
+        Elemento *prox = atual->prox;
         free(atual);
-        atual = atual->prox;
+        atual = prox;
     }
+
+    // libera o primeiro (início) e marca a lista como vazia
+    free(inicio);
     *li = NULL;
-    free(li);
+
+    // Observação: não liberamos o ponteiro `li` (a estrutura alocada por criar_lista)
+    // aqui para evitar que o chamador fique com um ponteiro inválido.
 }

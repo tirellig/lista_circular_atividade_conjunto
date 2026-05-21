@@ -105,12 +105,13 @@ int main() {
     printf("\n--- Lista Inversa --- \n");
     if(imprimir_lista_inversa(li)==0) printf("Erro na impressão da lista inversa!\n");
 
-    // 11. Libere toda a memória restante (Wendell)
+    // 11. Libere toda a memória restante (Wendel)
     liberar_lista(li);
-    li = NULL;
+    free(li);
+    li = NULL; 
 
-    printf("\n[ Programa finalizado e memoria liberada com sucesso. ]\n");
+    return 0; // encerra aqui após liberar memória
+
     
-    return 0; // Verifica se o programa retorna 0 com sucesso (sem crash).
 
 }
