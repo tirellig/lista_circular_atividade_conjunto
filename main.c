@@ -103,7 +103,7 @@ int main() {
 
     // 10. Imprime lista inversa (Gabriel)
     printf("\n--- Lista Inversa --- \n");
-    imprimir_lista_inversa(li);
+    if(imprimir_lista_inversa(li)==0) printf("Erro na impressão da lista inversa!\n");
 
     // 11. Libere toda a memória restante (Wendell)
     liberar_lista(li);

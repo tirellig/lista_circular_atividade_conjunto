@@ -158,12 +158,22 @@ void imprimir_lista(Lista *li) {
     printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
 }
 
-void imprimir_lista_inversa(Lista *li){
+int imprimir_lista_inversa(Lista *li){
     if (li == NULL || *li == NULL) {
         printf("Lista vazia.\n");
-        return;
+        return 0;
     }
-    return;
+
+    Elemento* referencia = (*li)->ant;
+
+    int i = 0;
+    while (referencia!=*li){
+        printf("[ID: %d | Valor: R$ %.2f] \n", referencia->dados.id, referencia->dados.valor);
+        referencia = referencia->ant;
+        printf("%d", ++i);
+    }
+
+    return 1;
 }
 
 void liberar_lista(Lista *li) {

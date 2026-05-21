@@ -33,7 +33,7 @@ int troca_inversa(Lista* li, int id_busca);
 
 // Funções auxiliares (recomendadas para visualização e limpeza)
 void imprimir_lista(Lista *li);
-void imprimir_lista_inversa(Lista *li);
+int imprimir_lista_inversa(Lista *li);
 void liberar_lista(Lista *li);
 
 #endif
