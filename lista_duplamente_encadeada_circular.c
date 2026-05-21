@@ -71,24 +71,28 @@ int inserir_transacao_ordenado(Lista *li, Transacao t) {
 int remover_transacao_id(Lista *li, int id_busca) {
     if (li == NULL || *li == NULL) return 0; // Lista não existe ou vazia
     
-    Elemento *anterior = NULL;
+//Elemento *anterior = NULL; não usa null
     Elemento *atual = *li;
 
     // Busca pelo elemento
-    while (atual != NULL && atual->dados.id != id_busca) {
-        anterior    = atual;
-        atual       = atual->prox;
-    }
+        do {
+    if (atual->dados.id == id_busca)
+        break;//acessa o id atual e compara o id com oq eu procuro    
+    atual = atual->prox;//se n encontrar, vai pro prox
     
-    if (atual == NULL) return 0; // Elemento não encontrado ou lista vazia
+        } while (atual != *li); 
+
+    if (atual->dados.id != id_busca) return 0; // não achou o id na lista toda
     
-    // O elemento a ser removido é o primeiro da lista
-    if (anterior == NULL) {
-        // trata tanto a lista com um único elemento (vai ficar vazia) 
-        *li = atual->prox; // vai ficar NULL se atual for o único
+// trata tanto a lista com um único elemento (vai ficar vazia) 
+       if (atual->prox == atual && atual->ant == atual) {
+            *li =NULL; // lista fica sem nd
+
     } else {
+
         // O elemento a ser removido está no meio ou no fim
-        anterior->prox = atual->prox;
+        atual->ant->prox = atual->prox;
+        atual->prox->ant = atual->ant;
     }
     
     free(atual); // Libera a memória do nó removido
@@ -96,6 +100,22 @@ int remover_transacao_id(Lista *li, int id_busca) {
 }
 
 int remover_transacao_inicio(Lista *li) {
+    if (li == NULL || *li == NULL) return 0;
+
+    Elemento *primeiro = *li;
+    if (primeiro->prox == primeiro) {
+        *li = NULL;
+    } 
+    else {
+        Elemento *ultimo  = primeiro->ant;
+        Elemento *segundo = primeiro->prox;
+
+        ultimo->prox  = segundo;
+        segundo->ant  = ultimo;
+        *li = segundo;
+    }
+
+    free(primeiro);
 
     return 1;
 }
@@ -170,12 +190,12 @@ void imprimir_lista(Lista *li) {
     Elemento *atual = *li;
     Elemento *ultimo = (*li)->ant;
 
-    printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
+    //printf("... [ID: %d | Valor: R$ %.2f] <-> ", ultimo->dados.id, ultimo->dados.valor);
     do {
         printf("[ID: %d | Valor: R$ %.2f] <-> ", atual->dados.id, atual->dados.valor);
         atual = atual->prox;
     } while (atual != *li);
-    printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
+    //printf("[ID: %d | Valor: R$ %.2f] ...\n", (*li)->dados.id, (*li)->dados.valor);
 }
 
 int imprimir_lista_inversa(Lista *li){
@@ -186,10 +206,10 @@ int imprimir_lista_inversa(Lista *li){
 
     Elemento* referencia = (*li)->ant;
 
-    while (referencia!=*li){
+    do {
         printf("[ID: %d | Valor: R$ %.2f] \n", referencia->dados.id, referencia->dados.valor);
         referencia = referencia->ant;
-    }
+    } while (referencia!=(*li)->ant);
 
     return 1;
 }
@@ -210,7 +230,12 @@ void liberar_lista(Lista *li) {
     // libera o primeiro (início) e marca a lista como vazia
     free(inicio);
     *li = NULL;
+<<<<<<< HEAD
 
     // Observação: não liberamos o ponteiro `li` (a estrutura alocada por criar_lista)
     // aqui para evitar que o chamador fique com um ponteiro inválido.
 }
+=======
+    free(li);
+}
+>>>>>>> 1821f9e00a60a441349e7ef03ce49b91e86fc902

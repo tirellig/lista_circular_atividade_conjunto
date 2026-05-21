@@ -56,7 +56,6 @@ int main() {
         printf("\nErro na remoçao! \n");
     }
 
-
     // 5. Removendo a primeira transação (Pedro)
     if (remover_transacao_inicio(li)){
         printf("\n--- Apos remover a primeira transacao ---\n");
@@ -85,8 +84,8 @@ int main() {
     
     // 8. Inserindo uma transacao no meio (ordenado) (Rafael)
     Transacao transacao7;
-    transacao7.id = 15; transacao6.valor = 700;
-    if (inserir_transacao_final(li, transacao7)){
+    transacao7.id = 15; transacao7.valor = 700;
+    if (inserir_transacao_ordenado(li, transacao7)){
         printf("\n--- Apos inserir uma transacao ordenado ---\n");
         imprimir_lista(li);
     } else {
